@@ -5,7 +5,6 @@
                 color=#40b09b
                 dense
 
-
         >
             <v-app-bar-nav-icon class="white--text" @click.stop="navDrawer = !navDrawer"/>
 
@@ -16,8 +15,8 @@
             </v-toolbar-title>
             <v-spacer/>
 
-            <v-btn @click="signUp" depressed class="mr-4" color="white" outlined>Sign Up</v-btn>
-            <v-btn @click="login" depressed color="white" outlined>
+            <v-btn to="/register" depressed class="mr-4" color="white" outlined>Sign Up</v-btn>
+            <v-btn to="/login" depressed color="white" outlined>
                 Login
             </v-btn>
 
@@ -71,23 +70,23 @@
                         @click="save"
                 >
                     <v-list-item-action>
-                        <v-icon :class="loginText">save</v-icon>
+                        <v-icon color="grey darken-1">save</v-icon>
                     </v-list-item-action>
-                    <v-list-item-title :class="loginText">Save Code</v-list-item-title>
+                    <v-list-item-title class="grey--text text--darken-1">Save Code</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item link @click="settings">
                     <v-list-item-action>
-                        <v-icon :class="loginText">mdi-settings</v-icon>
+                        <v-icon color="grey darken-1">mdi-settings</v-icon>
                     </v-list-item-action>
-                    <v-list-item-title :class="loginText" >Settings</v-list-item-title>
+                    <v-list-item-title class="grey--text text--darken-1">Settings</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item link>
                     <v-list-item-action>
-                        <v-icon :class="loginText">mdi-send</v-icon>
+                        <v-icon color="grey darken-1">mdi-send</v-icon>
                     </v-list-item-action>
-                    <v-list-item-title :class="loginText" >Share Code</v-list-item-title>
+                    <v-list-item-title class="grey--text text--darken-1">Share Code</v-list-item-title>
                 </v-list-item>
 
             </v-list>
@@ -99,13 +98,13 @@
                 </div>
                 <v-list>
                     <v-list-item
-                            v-for="(item, index) in joinMembers"
+                            v-for="item in joinMembers"
                             :key="item"
                             link
                     >
                         <v-list-item-avatar>
                             <img
-                                    :src="`https://randomuser.me/api/portraits/men/${index}.jpg`"
+                                    :src="`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 100)}.jpg`"
                                     alt=""
                             >
                         </v-list-item-avatar>
@@ -143,12 +142,10 @@
                 miniVariant: false,
                 expandOnHover: false,
                 background: false,
-                loginText : 'grey--text text--darken-1',
             }
         },
         computed: {
             isInCodeRoom() {
-                this.loginText = this.$store.state.common.isInCodeRoom === true ? 'text--white' : 'grey--text text--darken-1';
                 return this.$store.state.common.isInCodeRoom;
             },
             joinMembers() {
@@ -156,18 +153,11 @@
             }
         },
         methods: {
-            login() {
-                this.$router.push({path: './login'})
-            },
-            signUp() {
-                alert("Sign Up");
-            },
             save() {
                 alert("Save Code");
             },
             settings() {
             },
-
         },
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <NavBar/>
+        <NewNav/>
         <v-content style="padding-top: 24px">
             <router-view/>
         </v-content>
@@ -8,13 +8,13 @@
 </template>
 
 <script>
-    import NavBar from "./views/NavBar";
+    import NewNav from "./views/NewNav";
 
     export default {
         name: 'App',
 
         components: {
-            NavBar,
+            NewNav,
         },
     };
 </script>

@@ -2,7 +2,7 @@
     
 <div id="app">
   <v-app>
-      <v-container fluid pa-0>
+    <v-container fluid pa-0>
         <div class="background-shapes-wrapper">
           <div class="background-shapes-container">
             <div class="background-shape circle-one"></div>
@@ -22,28 +22,21 @@
             <v-layout column align-center justify-center fill-height pa-3>
               <div class="login-wrapper text-xs-center mb-3 pa-5">
                 <div class="display-1 font-weight-black mb-3" v-if="isSwitch">Hello, Nice to meet you!</div>
-                <div class="display-1 font-weight-black mb-3" v-else>Welcome Back!</div>
                 <span class="subheading" v-if="isSwitch">
                     Write your personal details and Co-op with your team.
                    If you already have an account, click Login button.
                 </span>
-                <span class="subheading" v-else>
-                  please login with your account!
-                  If you don't have account, please click Sign Up button.
-                </span>
               </div>
-              <v-btn rounded outlined large dark ripple v-if="isSwitch" id="sign-up" @click="isSwitch = !isSwitch">Log in</v-btn>
-              <v-btn rounded outlined large dark ripple v-else id="sign-in" @click="isSwitch = !isSwitch">Sign Up</v-btn>
             </v-layout>
           </v-flex>
-
           <v-flex xs12 sm8 id="sign-up-form-wrapper" class="active" v-bind:class="{ switch: isSwitch}">
-            <v-layout column align-center justify-center pa-3 mt-5 style="margin-top: 100px">
+            <v-layout column align-center justify-center pa-3 mt-5>
               <v-flex xs12 mb-3 mt-5>
                 <div class="login-wrapper text-xs-center">
-                  <div class="display-1 font-weight-black" v-if="isSwitch">회원 가입</div>
-                  <div class="display-1 font-weight-black" v-else>로그인</div>
+                  <div class="display-1 font-weight-black" v-if="isSwitch">Create Account</div>
                 </div>
+              </v-flex>
+              <v-flex v-if="isSwitch" xs12 mb-2> <span class="grey--text text--lighten-1">or use your email for registration</span>
               </v-flex>
               <v-flex xs12 class="form-wrapper">
                 <v-text-field v-if="isSwitch"
@@ -60,7 +53,7 @@
                 prepend-inner-icon="mdi-account-outline"
                 mb-0
                 ></v-text-field>
-                <v-text-field
+                <v-text-field 
                 filled full-width single-line label="Email"
                 background-color="#f4f8f7"
                 color="grey darken-2"
@@ -91,7 +84,7 @@
 export default {
     data: () => ({
     show1: true,
-    isSwitch: false,
+    isSwitch: true,
     password: "Password"
     }),
     methods: {
