@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <NewNav/>
+        <!-- <NewNav/> -->
         <v-content style="padding-top: 24px">
             <router-view/>
         </v-content>
@@ -9,17 +9,18 @@
 
 <script>
     import NewNav from "./views/NewNav";
-
+    
     export default {
         name: 'App',
 
         components: {
             NewNav,
+          
         },
     };
 </script>
 
-<style>
+<style scoped>
     a{
         color: white !important;
         text-decoration: none;
