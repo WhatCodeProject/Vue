@@ -48,7 +48,6 @@
         data() {
             return {
                 rooms: [],
-                url: 'http://localhost:8080',
             }
         },
         methods: {
@@ -58,7 +57,7 @@
             }
         },
         created() {
-            axios.get(`${this.url}/api/rooms`)
+            axios.get(`${process.env.VUE_APP_BASEURL}/api/rooms`)
                 .then(response => this.rooms = response.data)
                 .catch(error => console.log(error));
 

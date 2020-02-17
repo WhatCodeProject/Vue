@@ -42,9 +42,7 @@
         name: 'HelloWorld',
         data() {
             return {
-                room: {
-                    roomName: ' '
-                },
+                room:'',
                 name: 'Member' + Math.floor(Math.random() * 30),
                 text: '', // 스낵바
                 color: '',
@@ -57,7 +55,6 @@
                 isWriter: true,
                 timeout: null,
                 stompClient: null,
-                url: 'http://localhost:8080',
             }
         },
         components: {
@@ -65,7 +62,7 @@
         },
         methods: {
             connect() {
-                let socket = new SockJs(this.url + '/what-code');
+                let socket = new SockJs(process.env.VUE_APP_BASEURL + '/what-code');
                 this.stompClient = Stomp.over(socket);
                 this.stompClient.connect({}, frame => {
                     this.isConnect = true;
@@ -129,11 +126,12 @@
             }
         },
         created() {
-            axios.get(`${this.url}/api/rooms/${this.$route.params.id}`)
+            axios.get(`${process.env.VUE_APP_BASEURL}/api/rooms/${this.$route.params.id}`)
                 .then(res => {
                     this.room = res.data;
-                    this.connect();
+                    this.$store.state.common.roomTitle = this.room.title;
                     this.roomId = this.$route.params.id;
+                    this.connect();
                 })
                 .catch(e => console.log(e));
         },
@@ -146,6 +144,8 @@
                     type: 'DISCONNECT'
                 }));
             this.$store.commit('CLEAR_JOIN_MEMBERS');
+            this.$store.state.common.roomTitle = '';
+            this.$store.state.common.isInCodeRoom = false;
 
         },
         destroyed() {

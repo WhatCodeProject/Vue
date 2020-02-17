@@ -14,7 +14,8 @@
                 </span>
             </v-toolbar-title>
             <v-spacer/>
-
+            <h2 class="white--text">{{roomTitle}}</h2>
+            <v-spacer/>
             <v-btn to="/register" depressed class="mr-4" color="white" outlined>Sign Up</v-btn>
             <v-btn to="/login" depressed color="white" outlined>
                 Login
@@ -152,6 +153,9 @@
             },
             joinMembers() {
                 return this.$store.state.common.joinMembers;
+            },
+            roomTitle(){
+                return this.$store.state.common.roomTitle;
             }
         },
         methods: {

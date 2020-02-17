@@ -1,6 +1,7 @@
 const state = {
     isInCodeRoom: false,
-    joinMembers:[]
+    joinMembers:[],
+    roomTitle: '',
 };
 
 const getters = {};
