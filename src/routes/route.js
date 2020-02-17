@@ -23,7 +23,15 @@ const router = new VueRouter({
         {
             path:'/register',
             component: () => import('../views/Register')
-        }
+        },
+        {
+            path:'/home',
+            component: () => import('../views/Home')
+        },
+        {
+            path:'/chat',
+            component: () => import('../views/Chat')
+        },
     ]
 });
 
