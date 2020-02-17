@@ -1,7 +1,9 @@
 <template>
     <v-app>
-        <!-- <NewNav/> -->
-        <v-content style="padding-top: 24px">
+        <NewNav
+                v-if="this.$route.path !== '/home'"
+        />
+        <v-content>
             <router-view/>
         </v-content>
     </v-app>
@@ -9,20 +11,25 @@
 
 <script>
     import NewNav from "./views/NewNav";
-    
+
     export default {
         name: 'App',
 
         components: {
             NewNav,
-          
+
         },
     };
 </script>
 
-<style scoped>
-    a{
+<style>
+    a {
         color: white !important;
         text-decoration: none;
+    }
+
+    .container {
+        padding-top: 0;
+        padding-bottom: 0;
     }
 </style>

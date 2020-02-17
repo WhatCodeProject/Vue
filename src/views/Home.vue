@@ -11,7 +11,7 @@
                 >Realtime co-op application created by Vue and Spring Boot.
                 Create A Room, Join a Room, Chat with people!
                 </p>
-                <router-link to="/" class="btn btn--anim btn--danger">Cooperation</router-link>
+                <router-link to="/rooms" class="btn btn--anim btn--danger">Cooperation</router-link>
                 <router-link to="/register" class="btn btn--anim btn--info">Register Now</router-link>
                 <div class="section__graphic">
                     <img src="@/assets/img/undraw_group_chat_v059.svg" alt />

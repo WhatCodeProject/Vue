@@ -51,6 +51,7 @@
                 snackbar: false,
                 what: '',
                 code: '',
+                roomId: '',
                 codeOption: codeOption,
                 isConnect: false,
                 isWriter: true,
@@ -64,17 +65,17 @@
         },
         methods: {
             connect() {
-                let socket = new SockJs(this.url + '/code-share');
+                let socket = new SockJs(this.url + '/what-code');
                 this.stompClient = Stomp.over(socket);
                 this.stompClient.connect({}, frame => {
                     this.isConnect = true;
                     this.snackbarSetText('연결 성공.', 'indigo');
 
                     console.log('Connected: ' + frame);
-                    this.stompClient.subscribe(`/subscribe/code/room/${this.$route.params.id}`,
+                    this.stompClient.subscribe(`/subscribe/room/${this.$route.params.id}`,
                         message => {
                             let body = JSON.parse(message.body);
-                            if (body.type === 'SHARE') {
+                            if (body.type === 'CODE') {
                                 if (body.author === this.name) {
                                     this.code = body.message;
                                 } else {
@@ -84,17 +85,20 @@
                                         this.isWriter = true;
                                     }, 100);
                                 }
-                            } else {
-                                this.$store.commit('SET_JOIN_MEMBERS', body);
-                                console.log('JOINED', body);
+                            } else if(body.type === 'CHAT') {
+                            }
+                            else{
+                                this.$store.commit('SET_JOIN_MEMBERS', body.member);
+                                this.code = body.code;
                             }
                         });
 
-                    this.stompClient.send('/publish/code/join'
+                    this.stompClient.send('/share/room/connect'
                         , JSON.stringify({
                             roomId: this.$route.params.id,
                             author: this.name,
-                            type: 'JOIN'
+                            type: 'CONNECT',
+                            message: '',
                         }));
                 });
             },
@@ -103,14 +107,14 @@
                     if (this.isWriter) {
                         clearTimeout(this.timeout);
                         this.timeout = setTimeout(() => {
-                            this.stompClient.send('/publish/code/share',
+                            this.stompClient.send('/share/room/code',
                                 JSON.stringify({
                                     roomId: this.$route.params.id,
                                     message: this.code,
                                     author: this.name,
-                                    type: 'SHARE'
+                                    type: 'CODE'
                                 }));
-                        }, 100);
+                        }, 200);
                     }
 
                 } else {
@@ -129,16 +133,20 @@
                 .then(res => {
                     this.room = res.data;
                     this.connect();
+                    this.roomId = this.$route.params.id;
                 })
                 .catch(e => console.log(e));
         },
         beforeDestroy() {
-            this.stompClient.send('/publish/code/disconnect'
+            this.stompClient.send('/share/room/disconnect'
                 , JSON.stringify({
-                    roomId: this.$route.params.id,
+                    roomId: this.roomId,
                     author: this.name,
-                    type: 'JOIN'
+                    code: this.code,
+                    type: 'DISCONNECT'
                 }));
+            this.$store.commit('CLEAR_JOIN_MEMBERS');
+
         },
         destroyed() {
             this.stompClient.disconnect();

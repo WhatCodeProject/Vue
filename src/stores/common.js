@@ -11,6 +11,9 @@ const mutations = {
     },
     SET_JOIN_MEMBERS(state, joinMembers){
         state.joinMembers = joinMembers;
+    },
+    CLEAR_JOIN_MEMBERS(state){
+        state.joinMembers = [];
     }
 };
 

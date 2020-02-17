@@ -52,6 +52,7 @@
                 <v-list-item
                         v-for="item in items"
                         :key="item.title"
+                        :to="item.route"
                         link
                 >
                     <v-list-item-icon>
@@ -104,7 +105,7 @@
                     >
                         <v-list-item-avatar>
                             <img
-                                    :src="`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 100)}.jpg`"
+                                    :src="`https://randomuser.me/api/portraits/men/${Math.abs(hashCode(item) % 100)}.jpg`"
                                     alt=""
                             >
                         </v-list-item-avatar>
@@ -121,14 +122,15 @@
 </template>
 
 <script>
+
     export default {
         data() {
             return {
                 drawer: true,
                 navDrawer: true,
                 items: [
-                    {title: 'Add Channels', icon: 'add'},
-                    {title: 'Messanger', icon: 'chat'},
+                    {title: 'Add Channels', icon: 'add', route: '/add'},
+                    {title: 'Messanger', icon: 'chat', route: '/chat'},
                 ],
                 color: '#40b09b',
                 colors: [
@@ -158,6 +160,10 @@
             },
             settings() {
             },
+            hashCode(str) {
+                return Array.from(str)
+                    .reduce((s, c) => Math.imul(31, s) + c.charCodeAt(0) | 0, 0)
+            }
         },
     }
 </script>

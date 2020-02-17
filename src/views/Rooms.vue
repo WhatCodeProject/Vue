@@ -21,11 +21,11 @@
                     <div v-if="rooms.length !== 0">
                         <v-list-item
                                 v-for="room in rooms"
-                                :key="room.id"
+                                :key="room.roomId"
                                 @click=""
                         >
                             <v-list-item-content>
-                                <h3 class="font-weight-bold">{{room.roomName}}</h3>
+                                <h3 class="font-weight-bold">{{room.title}}</h3>
                             </v-list-item-content>
 
                             <v-list-item-icon>

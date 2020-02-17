@@ -8,6 +8,10 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
+            redirect: '/home'
+        },
+        {
+            path: '/rooms',
             name: 'rooms',
             component: () => import('../views/Rooms')
         },
