@@ -32,6 +32,14 @@ const router = new VueRouter({
             path:'/chat',
             component: () => import('../views/Chat')
         },
+        {
+            path:'/TeamRoom',
+            component: () => import('../views/TeamRoom')
+        },
+        {
+            path:'/CodeRoom',
+            component: () => import('../views/CodeRoom')
+        },
     ]
 });
 

@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
  #logs {
-  height: 100px;
+  height: 300px;
   overflow: auto;
 }
 </style>
