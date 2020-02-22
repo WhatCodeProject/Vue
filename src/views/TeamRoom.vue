@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="teams"
     sort-by="name"
     class="elevation-1"
   >
@@ -56,9 +56,16 @@
       </v-icon>
       <v-icon
         small
+        class="mr-2"
         @click="deleteItem(item)"
       >
         delete
+      </v-icon>
+      <v-icon
+        small
+        @click="moveCodeRoom()"
+      >
+        code
       </v-icon>
     </template>
     <template v-slot:no-data>
@@ -78,7 +85,7 @@
           sortable: false,
           value: 'name',
         },
-        { text: 'Number of People', value: 'calories' },
+        { text: 'Number of People', value: 'peopleNum' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
       teams: [],
@@ -155,6 +162,9 @@
         }
         this.close()
       },
+      moveCodeRoom () {
+        this.$router.push('/CodeRoom')
+      }
     },
   }
 </script>
